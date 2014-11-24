@@ -32,7 +32,6 @@ module.exports = function(Publication) {
             slug:"slug"
         },function(err){
             if(!err){
-                console.log(newdata);
                 next();
             }else{
              throw new Error(err);
