@@ -2,7 +2,7 @@
 
 url friendly generator for loopback.io framework.
 
-[![build status](http://www.sushininja.de/assets/img/ninja-logo.png)](http://travis-ci.org/rikhart/loopback-slug)
+[![build status](https://lh6.googleusercontent.com/Xo-IA_udhXRIyATszP3UWI6jwR6lGjk1v5KJWDC6VYHOj1OFxNlfpPJwHV0gS226RizBNMe37W8=w1000-h519)](http://travis-ci.org/rikhart/loopback-slug)
 
 ## Installation
 
