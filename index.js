@@ -14,10 +14,9 @@ module.exports = {
             cb=opt;
         }
         var strlug = "";
-        console.log(Model);
         options.fields.forEach(function (field) {
             strlug += "-" + newdata[field];
-        })
+        });
         strlug = slug(strlug.substr(1));
         if (newdata[options.slug].substr(0,item.lastIndexOf(options.separator))==strlug) {
             newdata[options.slug] = strlug;
@@ -29,7 +28,6 @@ module.exports = {
                     slug: new RegExp('^' + strlug)
                 }
             }, function (err, docs) {
-                console.log(docs);
                 if (err) {
                     cb(err);
                 }
