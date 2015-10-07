@@ -1,0 +1,119 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/rikhart/.nvm/versions/io.js/v3.3.1/bin/iojs',
+1 verbose cli   '/home/rikhart/.nvm/versions/io.js/v3.3.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@2.14.3
+3 info using node@v3.3.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/rikhart/Escritorio/slug',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/rikhart/.npm/loopback-slug/1.0.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/home/rikhart/.npm/loopback-slug/1.0.0/package.tgz',
+9 verbose tar pack   '/home/rikhart/Escritorio/slug' ]
+10 verbose tarball /home/rikhart/.npm/loopback-slug/1.0.0/package.tgz
+11 verbose folder /home/rikhart/Escritorio/slug
+12 info prepublish loopback-slug@1.0.0
+13 verbose unsafe-perm in lifecycle true
+14 verbose addLocalTarball adding from inside cache /home/rikhart/.npm/loopback-slug/1.0.0/package.tgz
+15 silly cache afterAdd loopback-slug@1.0.0
+16 verbose afterAdd /home/rikhart/.npm/loopback-slug/1.0.0/package/package.json not in flight; writing
+17 verbose afterAdd /home/rikhart/.npm/loopback-slug/1.0.0/package/package.json written
+18 silly publish { name: 'loopback-slug',
+18 silly publish   version: '1.0.0',
+18 silly publish   description: 'slugyfy your properties',
+18 silly publish   homepage: 'https://github.com/rikhart/loopback-slug#readme',
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/rikhart/loopback-slug.git' },
+18 silly publish   author: { name: 'Dick Van Ocampo Davila', email: 'jholarck@gmail.com' },
+18 silly publish   files: [ 'lib' ],
+18 silly publish   main: 'lib/index.js',
+18 silly publish   keywords: [],
+18 silly publish   devDependencies:
+18 silly publish    { gulp: '^3.6.0',
+18 silly publish      'gulp-eslint': '^1.0.0',
+18 silly publish      'gulp-exclude-gitignore': '^1.0.0',
+18 silly publish      'gulp-istanbul': '^0.9.0',
+18 silly publish      'gulp-mocha': '^2.0.0',
+18 silly publish      'gulp-plumber': '^1.0.0',
+18 silly publish      'gulp-nsp': '^0.4.5',
+18 silly publish      'gulp-coveralls': '^0.1.0' },
+18 silly publish   scripts: { prepublish: 'gulp prepublish', test: 'gulp' },
+18 silly publish   license: 'Apache-2.0',
+18 silly publish   dependencies: { slug: '^0.9.1' },
+18 silly publish   readme: '# loopback-slug\n\nurl friendly generator for loopback.io framework.\n\n[![build status](https://raw.githubusercontent.com/Rikhart/loopback-slug/master/dicko.png)](http://travis-ci.org/rikhart/loopback-slug)\n\n## Installation\n\nThis module is installed via npm:\n\n``` bash\n$ npm install loopback-slug\nor\n$ npm install git://github.com/rikhart/loopback-slug.git\n```\n\n## Example Usage\nEdit the /common/models/name_of_your_models.js and add a hook method.\nUse the hook "beforeSave" method to add the functionality, pass the Model,newdata,and the configoptions.\n\n## Configoptions:(json object)\n* **separator** (Default: \'-\') - Separator to use for characters.\n* **slug** (Default: \'slug\') - Parts that are uploaded simultaneously.\n* **fields** (Default: \'title\') - Array that will use to form the slug.\n\n``` js\nvar loopbackslug=require("loopback-slug");\nmodule.exports = function(Publication) {\n    Publication.observe(\'before save\', function updateTimestamp(ctx, next) {\n      loopbackslug.middleware(Publication,this,{\n          fields:[\'title\'],\n          slug:"slug"\n      },function(err){\n          if(err) return cb(err)\n          else cb(null);\n      });    \n    });    \n};\n\n```\n\n## License\n\nApache-2.0 © [Dick Van Ocampo Davila]()\n\n\n[npm-image]: https://badge.fury.io/js/loopback-slug.svg\n[npm-url]: https://npmjs.org/package/loopback-slug\n[travis-image]: https://travis-ci.org/rikhart/loopback-slug.svg?branch=master\n[travis-url]: https://travis-ci.org/rikhart/loopback-slug\n[daviddm-image]: https://david-dm.org/rikhart/loopback-slug.svg?theme=shields.io\n[daviddm-url]: https://david-dm.org/rikhart/loopback-slug\n[coveralls-image]: https://coveralls.io/repos/rikhart/loopback-slug/badge.svg\n[coveralls-url]: https://coveralls.io/r/rikhart/loopback-slug\n',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: '43d923470934865392b0c59dabe570488f9d80fb',
+18 silly publish   bugs: { url: 'https://github.com/rikhart/loopback-slug/issues' },
+18 silly publish   _id: 'loopback-slug@1.0.0',
+18 silly publish   _shasum: 'ec069d1bd865f0a6a6a6294c02cbc97b57fc85c2',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name loopback-slug
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/loopback-slug
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading /home/rikhart/.npm/loopback-slug/1.0.0/package.tgz
+26 verbose request uri https://registry.npmjs.org/loopback-slug
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 01:07:57
+29 verbose request using bearer token for auth
+30 verbose request id 45837ec52ad84b2c
+31 http request PUT https://registry.npmjs.org/loopback-slug
+32 http 504 https://registry.npmjs.org/loopback-slug
+33 verbose bad json <html><body><h1>504 Gateway Time-out</h1>
+33 verbose bad json The server didn't respond in time.
+33 verbose bad json </body></html>
+34 error registry error parsing json
+35 info retry will retry, error on last attempt: SyntaxError: Unexpected token <
+35 info retry <html><body><h1>504 Gateway Time-out</h1>
+35 info retry The server didn't respond in time.
+35 info retry </body></html>
+36 info attempt registry request try #2 at 01:08:58
+37 verbose request using bearer token for auth
+38 http request PUT https://registry.npmjs.org/loopback-slug
+39 http 403 https://registry.npmjs.org/loopback-slug
+40 verbose headers { 'content-type': 'application/json',
+40 verbose headers   'cache-control': 'max-age=60',
+40 verbose headers   'content-length': '95',
+40 verbose headers   'accept-ranges': 'bytes',
+40 verbose headers   date: 'Wed, 07 Oct 2015 06:08:59 GMT',
+40 verbose headers   via: '1.1 varnish',
+40 verbose headers   connection: 'keep-alive',
+40 verbose headers   'x-served-by': 'cache-sjc3133-SJC',
+40 verbose headers   'x-cache': 'MISS',
+40 verbose headers   'x-cache-hits': '0',
+40 verbose headers   'x-timer': 'S1444198139.098278,VS0,VE102' }
+41 verbose request invalidating /home/rikhart/.npm/registry.npmjs.org/loopback-slug on PUT
+42 error publish Failed PUT 403
+43 verbose stack Error: "You cannot publish over the previously published version 1.0.0." : loopback-slug
+43 verbose stack     at makeError (/home/rikhart/.nvm/versions/io.js/v3.3.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:263:12)
+43 verbose stack     at CachingRegistryClient.<anonymous> (/home/rikhart/.nvm/versions/io.js/v3.3.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:251:14)
+43 verbose stack     at Request._callback (/home/rikhart/.nvm/versions/io.js/v3.3.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:171:14)
+43 verbose stack     at Request.self.callback (/home/rikhart/.nvm/versions/io.js/v3.3.1/lib/node_modules/npm/node_modules/request/request.js:198:22)
+43 verbose stack     at emitTwo (events.js:87:13)
+43 verbose stack     at Request.emit (events.js:172:7)
+43 verbose stack     at Request.<anonymous> (/home/rikhart/.nvm/versions/io.js/v3.3.1/lib/node_modules/npm/node_modules/request/request.js:1073:14)
+43 verbose stack     at emitOne (events.js:82:20)
+43 verbose stack     at Request.emit (events.js:169:7)
+43 verbose stack     at IncomingMessage.<anonymous> (/home/rikhart/.nvm/versions/io.js/v3.3.1/lib/node_modules/npm/node_modules/request/request.js:1019:12)
+44 verbose statusCode 403
+45 verbose pkgid loopback-slug
+46 verbose cwd /home/rikhart/Escritorio/slug
+47 error Linux 3.19.0-26-generic
+48 error argv "/home/rikhart/.nvm/versions/io.js/v3.3.1/bin/iojs" "/home/rikhart/.nvm/versions/io.js/v3.3.1/bin/npm" "publish"
+49 error node v3.3.1
+50 error npm  v2.14.3
+51 error code E403
+52 error "You cannot publish over the previously published version 1.0.0." : loopback-slug
+53 error If you need help, you may report this error at:
+53 error     <https://github.com/npm/npm/issues>
+54 verbose exit [ 1, true ]
