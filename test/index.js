@@ -1,16 +1,8 @@
-var expect = require('chai').expect,
-    loopbackSlug = require('..');
-
-describe('loopback-slug', function() {
-  it('should say hello', function(done) {
-    expect(loopbackSlug.middleware({},{
-	req:{
-		body:{
-			name:"juan;anles",
-			lastname:"jose#"		
-		}	
-	}	
-	},['name','lastname'])).to.equal('Hello, world');
-    done();
+'use strict';
+var assert = require('assert');
+//var loopbackSlug = require('../lib');
+describe('loopback-slug', function () {
+  it('should have unit test!', function () {
+    assert(false, 'we expected this package author to add actual unit tests.');
   });
 });

@@ -1,3 +1,7 @@
+# loopback-slug [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+> slugyfy your properties
+
+
 # loopback-slug
 
 url friendly generator for loopback.io framework.
@@ -41,3 +45,17 @@ module.exports = function(Publication) {
 };
 
 ```
+
+## License
+
+Apache-2.0 © [Dick Van Ocampo Davila]()
+
+
+[npm-image]: https://badge.fury.io/js/loopback-slug.svg
+[npm-url]: https://npmjs.org/package/loopback-slug
+[travis-image]: https://travis-ci.org/rikhart/loopback-slug.svg?branch=master
+[travis-url]: https://travis-ci.org/rikhart/loopback-slug
+[daviddm-image]: https://david-dm.org/rikhart/loopback-slug.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/rikhart/loopback-slug
+[coveralls-image]: https://coveralls.io/repos/rikhart/loopback-slug/badge.svg
+[coveralls-url]: https://coveralls.io/r/rikhart/loopback-slug
