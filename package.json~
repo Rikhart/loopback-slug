@@ -1,6 +1,6 @@
 {
   "name": "loopback-slug",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "url friendly generator for loopback.io framework.",
   "homepage": "",
   "repository": "rikhart/loopback-slug",
