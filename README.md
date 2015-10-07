@@ -30,18 +30,15 @@ Use the hook "beforeSave" method to add the functionality, pass the Model,newdat
 ``` js
 var loopbackslug=require("loopback-slug");
 module.exports = function(Publication) {
-    Publication.beforeSave=function(next,newdata) {
-        loopbackslug.middleware(Publication,newdata,{
-            fields:['title'],
-            slug:"slug"
-        },function(err){
-            if(!err){
-                next();
-            }else{
-             throw new Error(err);
-            }
-        });
-    };
+    Publication.observe('before save', function updateTimestamp(ctx, next) {
+      loopbackslug.middleware(Publication,this,{
+          fields:['title'],
+          slug:"slug"
+      },function(err){
+          if(err) return cb(err)
+          else cb(null);
+      });    
+    });    
 };
 
 ```
