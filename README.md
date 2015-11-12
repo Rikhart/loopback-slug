@@ -22,6 +22,7 @@ Use the hook "beforeSave" method to add the functionality, pass the Model,newdat
 * **separator** (Default: '-') - Separator to use for characters.
 * **slug** (Default: 'slug') - Parts that are uploaded simultaneously.
 * **fields** (Default: 'title') - Array that will use to form the slug.
+* **lowercase** (Default: false) - Convert the slug to lowercase.
 
 ``` js
 var loopbackslug=require("loopback-slug");
