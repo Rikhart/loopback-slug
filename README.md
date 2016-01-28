@@ -25,6 +25,9 @@ Use the hook "beforeSave" method to add the functionality, pass the Model,newdat
 * **lowercase** (Default: false) - Convert the slug to lowercase.
 
 ``` js
+
+Works in last loopback Version, where currentInstance is part of the ctx.
+
 var loopbackslug=require("loopback-slug");
 module.exports = function (Category) {
   Category.observe('before save', function (ctx, next) {  //!!important

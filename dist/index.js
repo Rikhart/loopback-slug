@@ -9,6 +9,7 @@ var options = {
 module.exports = {
   middleware: function middleware(Model, ctx, opt, cb) {
     var auxdata = ctx.instance || ctx.data;
+
     function make(newdata) {
       if (opt instanceof Object) {
         for (var item in opt) {
@@ -27,6 +28,15 @@ module.exports = {
       }
       newdata[options.slug] = newdata[options.slug] || '';
       var iof = newdata[options.slug].lastIndexOf(options.separator) == -1 ? newdata[options.slug].length : newdata[options.slug].lastIndexOf(options.separator);
+
+      //Para cadenas largas comprobacion
+      function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
+      var isNumber = isNumber(parseInt(newdata[options.slug].substr(iof + 1, newdata[options.slug].length)));
+      if (!isNumber) iof = newdata[options.slug].length;
+      //Deficiencia si la cadena tiene un numero al final.
+
       if (newdata[options.slug].substr(0, iof) == strlug && newdata[options.slug].length) {
         newdata[options.slug] = newdata[options.slug];
         return cb(null);
@@ -37,6 +47,7 @@ module.exports = {
         Model.find({
           where: obj
         }, function (err, docs) {
+
           if (err) {
             cb(err);
           } else if (!docs.length) {
