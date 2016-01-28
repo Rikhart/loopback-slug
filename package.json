@@ -12,7 +12,7 @@
   "files": [
     "lib"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "keywords": [],
   "devDependencies": {
     "gulp": "^3.6.0",
