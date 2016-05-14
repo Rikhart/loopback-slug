@@ -91,6 +91,11 @@ module.exports = {
       }, function (err, data) {
         if (err) return cb(err);
         if (!data) return cb(auxdata);
+        for (var i in data) {
+          if (!auxdata[i]) {
+            if (data.hasOwnProperty(i)) auxdata[i] = data[i];
+          }
+        }
         auxdata[options.slug] = data[options.slug];
         make(auxdata);
       });
