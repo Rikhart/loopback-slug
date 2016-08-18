@@ -9,7 +9,6 @@ var options = {
 module.exports = {
   middleware: function middleware(Model, ctx, opt, cb) {
     var auxdata = ctx.instance || ctx.data;
-
     function make(newdata) {
       if (opt instanceof Object) {
         for (var item in opt) {
@@ -36,7 +35,6 @@ module.exports = {
       var isNumber = isNumber(parseInt(newdata[options.slug].substr(iof + 1, newdata[options.slug].length)));
       if (!isNumber) iof = newdata[options.slug].length;
       //Deficiencia si la cadena tiene un numero al final.
-
       if (newdata[options.slug].substr(0, iof) == strlug && newdata[options.slug].length) {
         newdata[options.slug] = newdata[options.slug];
         return cb(null);
@@ -47,7 +45,6 @@ module.exports = {
         Model.find({
           where: obj
         }, function (err, docs) {
-
           if (err) {
             cb(err);
           } else if (!docs.length) {
@@ -62,17 +59,15 @@ module.exports = {
               }
               return count > mx ? count : mx;
             }, 0);
-
             if (max == 1) {
               newdata[options.slug] = strlug + options.separator + (max + 1);
-              cb(null);
             } else if (max > 0) {
               newdata[options.slug] = strlug + options.separator + max;
-              cb(null);
             } else {
               newdata[options.slug] = strlug;
-              cb(null);
             }
+            ctx.currentInstance = newdata;
+            cb(null);
           }
         });
       }
@@ -81,6 +76,9 @@ module.exports = {
     if (ctx.currentInstance) {
       if (ctx.currentInstance.id) {
         band = true;
+      } else {
+        auxdata = ctx.currentInstance;
+        return make(auxdata);
       }
     }
     if (band) {
@@ -100,7 +98,25 @@ module.exports = {
         make(auxdata);
       });
     } else {
-      make(auxdata);
+      if (auxdata.id) {
+        Model.findOne({
+          where: {
+            id: auxdata.id
+          }
+        }, function (err, data) {
+          if (err) return cb(err);
+          if (!data) return cb(auxdata);
+          for (var i in data) {
+            if (!auxdata[i]) {
+              if (data.hasOwnProperty(i)) auxdata[i] = data[i];
+            }
+          }
+          auxdata[options.slug] = data[options.slug];
+          make(auxdata);
+        });
+      } else {
+        make(auxdata);
+      }
     }
   }
 };
