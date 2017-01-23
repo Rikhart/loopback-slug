@@ -1,5 +1,5 @@
 'use strict';
-var slug = require('slug');
+var slug = require('slugify');
 var options = {
   separator: '-',
   slug: 'slug',
@@ -9,14 +9,14 @@ var options = {
 module.exports = {
   middleware: function middleware(Model, ctx, opt, cb) {
     var auxdata = ctx.instance || ctx.data;
-    function make(newdata) {
-      if (opt instanceof Object) {
-        for (var item in opt) {
-          options[item] = opt[item];
-        }
-      } else if (opt instanceof Function) {
-        cb = opt;
+    if (opt instanceof Object) {
+      for (var item in opt) {
+        options[item] = opt[item];
       }
+    } else if (opt instanceof Function) {
+      cb = opt;
+    }
+    function make(newdata) {
       var strlug = '';
       options.fields.forEach(function (field) {
         strlug += options.separator + newdata[field];
@@ -27,7 +27,6 @@ module.exports = {
       }
       newdata[options.slug] = newdata[options.slug] || '';
       var iof = newdata[options.slug].lastIndexOf(options.separator) == -1 ? newdata[options.slug].length : newdata[options.slug].lastIndexOf(options.separator);
-
       //Para cadenas largas comprobacion
       function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -73,6 +72,31 @@ module.exports = {
       }
     }
     var band = false;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = options.fields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var field = _step.value;
+
+        if (!auxdata[field]) return cb(null);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator['return']) {
+          _iterator['return']();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
     if (ctx.currentInstance) {
       if (ctx.currentInstance.id) {
         band = true;
