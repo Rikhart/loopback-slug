@@ -151,7 +151,7 @@ module.exports = {
         }, function (err, data) {
           if (err) return cb(err);
           if (!data) return cb(auxdata);
-          data = data._data;
+          data = data.__data;
           for (var i in data) {
             if (!auxdata[i]) {
               if (data.hasOwnProperty(i)) auxdata[i] = data[i];
