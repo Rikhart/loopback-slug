@@ -7,7 +7,7 @@ var options = {
   lowercase: true
 };
 module.exports = {
-  middleware: function(Model, ctx, opt, cb) {
+  middleware: function middleware(Model, ctx, opt, cb) {
     var auxdata = ctx.instance || ctx.data;
     if (opt instanceof Object) {
       for (var item in opt) {
@@ -16,31 +16,29 @@ module.exports = {
     } else if (opt instanceof Function) {
       cb = opt;
     }
-
     function make(newdata) {
-      var slugify = function(str) {
-        var from  = "ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź",
-          to    = "aaaaaaaaceeeeeiiiilnoooooosuuuunczz",
-          regex = new RegExp('[' + from.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1') + ']', 'g');
+      var slugify = function slugify(str) {
+        var from = "ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź",
+            to = "aaaaaaaaceeeeeiiiilnoooooosuuuunczz",
+            regex = new RegExp('[' + from.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1') + ']', 'g');
 
         if (str == null) return '';
 
-        str = String(str).toLowerCase().replace(regex, function(c) {
+        str = String(str).toLowerCase().replace(regex, function (c) {
           return to.charAt(from.indexOf(c)) || '_';
         });
-
         return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '_').toLowerCase();
-      }
+      };
 
       var strlug = '';
-      options.fields.forEach(function(field) {
+      options.fields.forEach(function (field) {
         strlug += options.separator + newdata[field];
       });
 
       // fix
       var startAt = options.separator.length;
-      if(startAt == 0) {
-        strlug = strlug.replace(' ','');
+      if (startAt == 0) {
+        strlug = strlug.replace(' ', '');
       }
       strlug = slug(strlug.substr(startAt), options.separator);
 
@@ -49,7 +47,7 @@ module.exports = {
       }
       strlug = slugify(strlug);
       newdata[options.slug] = newdata[options.slug] || '';
-      var iof = (newdata[options.slug].lastIndexOf(options.separator) == -1) ? (newdata[options.slug].length) : (newdata[options.slug].lastIndexOf(options.separator));
+      var iof = newdata[options.slug].lastIndexOf(options.separator) == -1 ? newdata[options.slug].length : newdata[options.slug].lastIndexOf(options.separator);
       //Para cadenas largas comprobacion
       function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -66,13 +64,13 @@ module.exports = {
         obj[options['slug']] = new RegExp('^' + strlug + '($|' + options.separator + ')');
         Model.find({
           where: obj
-        }, function(err, docs) {
+        }, function (err, docs) {
           if (err) {
             cb(err);
           } else if (!docs.length) {
             cb(null);
           } else {
-            var max = docs.reduce(function(mx, doc) {
+            var max = docs.reduce(function (mx, doc) {
               var docSlug = doc[options.slug];
               var count = 1;
               if (docSlug != strlug) {
@@ -95,9 +93,31 @@ module.exports = {
       }
     }
     var band = false;
-    for (var field of options.fields) {
-      if (!auxdata[field]) return cb(null)
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = options.fields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var field = _step.value;
+
+        if (!auxdata[field]) return cb(null);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator['return']) {
+          _iterator['return']();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
     }
+
     if (ctx.currentInstance) {
       if (ctx.currentInstance.id) {
         band = true;
@@ -111,36 +131,35 @@ module.exports = {
         where: {
           id: ctx.currentInstance.id
         }
-      }, function(err, data) {
+      }, function (err, data) {
         if (err) return cb(err);
         if (!data) return cb(auxdata);
         for (var i in data) {
           if (!auxdata[i]) {
-            if (data.hasOwnProperty(i))
-              auxdata[i] = data[i];
+            if (data.hasOwnProperty(i)) auxdata[i] = data[i];
           }
         }
         auxdata[options.slug] = data[options.slug];
         make(auxdata);
-      })
+      });
     } else {
       if (auxdata.id) {
         Model.findOne({
           where: {
             id: auxdata.id
           }
-        }, function(err, data) {
+        }, function (err, data) {
           if (err) return cb(err);
           if (!data) return cb(auxdata);
+          data = data._data;
           for (var i in data) {
             if (!auxdata[i]) {
-              if (data.hasOwnProperty(i))
-                auxdata[i] = data[i];
+              if (data.hasOwnProperty(i)) auxdata[i] = data[i];
             }
           }
           auxdata[options.slug] = data[options.slug];
           make(auxdata);
-        })
+        });
       } else {
         make(auxdata);
       }
