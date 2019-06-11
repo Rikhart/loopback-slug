@@ -25,9 +25,9 @@ module.exports = {
         if (str == null) return '';
 
         str = String(str).toLowerCase().replace(regex, function (c) {
-          return to.charAt(from.indexOf(c)) || '_';
+          return to.charAt(from.indexOf(c)) || options.separator;
         });
-        return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '_').toLowerCase();
+        return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, options.separator).toLowerCase();
       };
 
       var strlug = '';
