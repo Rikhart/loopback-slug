@@ -62,6 +62,14 @@ module.exports = {
         newdata[options.slug] = strlug;
         var obj = {};
         obj[options['slug']] = new RegExp('^' + strlug + '($|' + options.separator + ')');
+
+        // Apply additional scope constraints
+        if (options['where']) {
+          for (var key in options['where']) {
+            obj[key] = options['where'][key];
+          }
+        }
+
         Model.find({
           where: obj
         }, function (err, docs) {
