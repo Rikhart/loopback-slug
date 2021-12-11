@@ -1,11 +1,17 @@
 'use strict';
-var slug = require('slugify');
+var slug = require('slugify', {
+  remove: /[*+~.()'"!:@]/g
+});
+
 var options = {
   separator: '-',
   slug: 'slug',
   fields: ['title'],
   lowercase: true
 };
+
+var result = slug('(hola)--fads*');
+console.log(result, "result");
 module.exports = {
   middleware: function middleware(Model, ctx, opt, cb) {
     var auxdata = ctx.instance || ctx.data;
@@ -27,7 +33,7 @@ module.exports = {
         str = String(str).toLowerCase().replace(regex, function (c) {
           return to.charAt(from.indexOf(c)) || options.separator;
         });
-        return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, options.separator).toLowerCase();
+        return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').toLowerCase();
       };
 
       var strlug = '';
@@ -61,6 +67,7 @@ module.exports = {
       } else {
         newdata[options.slug] = strlug;
         var obj = {};
+        strlug = strlug.replace(/[^\w\s]/gi, '');
         obj[options['slug']] = new RegExp('^' + strlug + '($|' + options.separator + ')');
 
         // Apply additional scope constraints
@@ -144,7 +151,7 @@ module.exports = {
         if (!data) return cb(auxdata);
         data = data.__data;
         for (var i in data) {
-          if (!auxdata[i]) {
+          if (typeof auxdata[i] == 'undefined') {
             if (data.hasOwnProperty(i)) auxdata[i] = data[i];
           }
         }
@@ -162,7 +169,7 @@ module.exports = {
           if (!data) return cb(auxdata);
           data = data.__data;
           for (var i in data) {
-            if (!auxdata[i]) {
+            if (typeof auxdata[i] == 'undefined') {
               if (data.hasOwnProperty(i)) auxdata[i] = data[i];
             }
           }

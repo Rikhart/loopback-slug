@@ -34,6 +34,6 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "slugify": "^1.1.0"
+    "slugify": "^1.6.3"
   }
 }
