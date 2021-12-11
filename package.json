@@ -1,11 +1,10 @@
 {
   "name": "loopback-slug",
   "version": "0.2.4",
-  "description": "url friendly generator for loopback.io framework.",
+  "description": "",
   "homepage": "",
-  "repository": "rikhart/loopback-slug",
   "author": {
-    "name": "Dick Van Ocampo Davila",
+    "name": "Dick",
     "email": "jholarck@gmail.com",
     "url": ""
   },
@@ -13,27 +12,61 @@
     "lib"
   ],
   "main": "lib/index.js",
-  "keywords": [],
+  "keywords": [
+    ""
+  ],
   "devDependencies": {
-    "gulp": "^3.6.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^0.9.0",
-    "gulp-mocha": "^2.0.0",
-    "gulp-plumber": "^1.0.0",
-    "gulp-nsp": "^2.1.0",
-    "gulp-coveralls": "^0.1.0",
-    "gulp-babel": "^5.1.0",
-    "del": "^2.0.2",
-    "babel-core": "^5.5.0",
-    "isparta": "^3.0.3"
+    "coveralls": "^3.0.7",
+    "eslint": "^6.6.0",
+    "prettier": "^1.19.1",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.3",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-config-xo": "^0.27.2",
+    "jest": "^26.1.0"
+  },
+  "engines": {
+    "npm": ">= 4.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "prettier"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "plugins": [
+      "prettier"
+    ]
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
+    "pretest": "eslint .",
+    "test": "jest"
   },
-  "license": "Apache-2.0",
-  "dependencies": {
-    "slugify": "^1.6.3"
-  }
+  "repository": "Rikhart/loopback-slug2",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "license": "Apache-2.0"
 }
