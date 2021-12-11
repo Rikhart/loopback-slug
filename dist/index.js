@@ -1,8 +1,5 @@
 'use strict';
-var slug = require('slugify', {
-  remove: /[*+~.()'"!:@]/g
-});
-
+var slug = require('slugify');
 var options = {
   separator: '-',
   slug: 'slug',
@@ -10,8 +7,6 @@ var options = {
   lowercase: true
 };
 
-var result = slug('(hola)--fads*');
-console.log(result, "result");
 module.exports = {
   middleware: function middleware(Model, ctx, opt, cb) {
     var auxdata = ctx.instance || ctx.data;
@@ -41,12 +36,14 @@ module.exports = {
         strlug += options.separator + newdata[field];
       });
 
-      // fix
       var startAt = options.separator.length;
       if (startAt == 0) {
         strlug = strlug.replace(' ', '');
       }
-      strlug = slug(strlug.substr(startAt), options.separator);
+      strlug = slug(strlug.substr(startAt), {
+        replacement: options.separator,
+        remove: /[*+~.()'"!:@]/g
+      });
 
       if (options.lowercase) {
         strlug = strlug.toLowerCase();
