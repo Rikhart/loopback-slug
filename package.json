@@ -64,7 +64,7 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "Rikhart/loopback-slug2",
+  "repository": "https://github.com/Rikhart/loopback-slug",
   "jest": {
     "testEnvironment": "node"
   },
